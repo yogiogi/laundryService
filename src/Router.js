@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Dimensions, Text, View } from 'react-native';
 import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
 import Additem from './home/Additem';
 import Profile from './pages/Profile';
@@ -10,7 +8,7 @@ import About from './pages/About';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import ReviewOrder from './reviewOrder/ReviewOrder';
-import Maps from './maps/maps';
+import Maps from './maps/petalokasi';
 // import Order from './pages/order';
 import authloading from './pages/AuthLoadingScreen';
 import forget from './auth/forgetPassword';
@@ -18,6 +16,8 @@ import forget from './auth/forgetPassword';
 import SideMenu from './home/SideMenu';
 import stackNav from './home/stacknav';
 import { Icon } from 'native-base';
+import Payment from './payment/payment';
+import mapViw from './maps/MapScreen';
 
 const AppStack = createStackNavigator({
   Home: {
@@ -103,7 +103,8 @@ const FitureStack = createStackNavigator({
   },
   About: About,
   ReviewOrder: ReviewOrder,
-  Maps: Maps
+  Maps: Maps,
+  Payment: Payment,
 })
 
 const AppContainer = createAppContainer(FitureStack);

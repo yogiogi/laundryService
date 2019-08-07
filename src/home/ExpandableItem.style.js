@@ -2,14 +2,14 @@ export default {
     container: {
       flex: 1,
       paddingTop: 30,
-      backgroundColor: '#964e4e',
+      backgroundColor: '#ffffff',
     },
     topHeading: {
       paddingLeft: 10,
       fontSize: 20,
     },
     header: {
-      backgroundColor: '#964e4e',
+      backgroundColor: '#ffffff',
       padding: 16,
     },
     headerText: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, TouchableOpacity, Alert, Button } from 'react-native';
 import { Text } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 import styles from './Login.styles';
@@ -21,10 +21,11 @@ export default class Login extends Component {
             <View
                 behavior="padding"
                 style={styles.Wrapper}>
+
                 <TextInput
                     placeholder='email'
                     underlineColorAndroid='white'
-                    placeholderTextColor='white'
+                    placeholderTextColor='#82D4E3'
                     style={styles.inputField}
                     onChangeText={(email) => this.setState({ email })}
                     value={this.state.email}
@@ -32,21 +33,31 @@ export default class Login extends Component {
                 <TextInput
                     placeholder='password'
                     underlineColorAndroid='white'
-                    placeholderTextColor='white'
+                    placeholderTextColor='#82D4E3'
                     secureTextEntry={true}
                     style={styles.inputField}
                     onChangeText={(password) => this.setState({ password })}
                     value={this.state.password}
                 />
-                <TouchableOpacity onPress={() => this._signin()}>
-                    <Text style={{ color: 'white', marginTop: 10 }}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                    <Text style={{ color: 'white', marginTop: 10 }}>SignUp</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Forget')}>
-                    <Text style={{ color: 'white', marginTop: 10 }}>Forget Password</Text>
-                </TouchableOpacity>
+
+                <View style={styles.ButtonContainer}>
+                    <TouchableOpacity onPress={() => this._signin()}>
+                        <Text style={{ color: 'white', marginTop: 10 }}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.container}>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
+                            <Text style={{ color: 'white', marginTop: 10, fontSize: 12 }}>SignUp</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Forget')}>
+                            <Text style={{ color: 'white', marginTop: 10, textAlign: 'right', fontSize: 12 }}>Reset</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         )
     }

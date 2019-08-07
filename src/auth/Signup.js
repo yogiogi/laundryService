@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#5c0404'
+        backgroundColor: '#82D4E3'
     },
     text: {
         color: 'blue',

@@ -7,16 +7,19 @@ import {
     TextInput,
     StyleSheet,
     UIManager,
-    Platform
-} from 'react-native';
+    Platform,
+    WebView,
+    ActivityIndicator
+} from 'react-native'
+import axios from 'axios'
 
 import DatePicker from 'react-native-datepicker';
 import styles from './ReviewOrder.style';
 import { taskItem } from '../Data';
 
 export default class ReviewOrder extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             date: "15-05-2018",
             address: '',
@@ -25,15 +28,24 @@ export default class ReviewOrder extends Component {
             detailOrder: '',
             listDataSource: taskItem,
         };
+
         console.log("taskItem ", taskItem);
     }
 
-    componentDidMount() {
-        const data = this.state.listDataSource.data.filter(item => item.quantity > 0)
-        console.log("data ", data);
+    state = {
+        accessToken: null,
+        approvalUrl: null,
+        paymentId: null
+    }
+
+    returnData(name) {
+        this.setState({ address: name });
     }
 
     render() {
+        const { approvalUrl } = this.state
+        const text = this.props.navigation.getParam('text', 'Find Location')
+
         return (
             <ScrollView style={[styles.container]}>
                 <View style={[styles.boxHeader]}>
@@ -41,11 +53,11 @@ export default class ReviewOrder extends Component {
                 </View>
                 <View style={[styles.boxDetail]}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
-                        <Text style={styles.textAlamat}
-                            value={this.state.address}
-                        >
+                        <Text style={styles.textAlamat}>
+                            {text}
                         </Text>
                     </TouchableOpacity>
+
                     <TextInput style={[styles.InputNotes]}
                         placeholder="notes"
                         value={this.state.notes}
@@ -138,13 +150,23 @@ export default class ReviewOrder extends Component {
                     <Text style={styles.textHeader}>How do you want to pay?</Text>
                 </View>
                 <View style={[styles.boxDetail]}>
-                    <Text style={styles.textHeader}>Payment Gateway</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Payment')}>
+                        <Text >
+                            PayPal
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TextInput style={[styles.InputNotes]}
+                        placeholder="notes"
+                        value={this.state.notes}
+                        onChangeText={notes => this.setState({ notes })}
+                    />
                 </View>
-                <View style={[styles.boxHeader]}>
-                    <Text style={styles.textHeader}>Payment Details</Text>
-                </View>
-                <View style={[styles.boxDetail]}>
-                
+
+                <View style={styles.bottomView} >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewOrder', { text: this.state.address })}>
+                        <Text style={styles.textStyle}>Save Location</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView >
         );

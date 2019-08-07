@@ -1,4 +1,7 @@
 export default {
+    map: {
+        flex: 1
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -22,7 +25,7 @@ export default {
     boxHeader: {
         flex: 1,
         paddingTop: 10,
-        paddingLeft: 20,    
+        paddingLeft: 20,
         paddingRight: 20
     },
     boxDetail: {
@@ -69,5 +72,18 @@ export default {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
+    },
+    bottomView: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#FF9800',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0
+    },
+    textStyle: {
+        color: '#fff',
+        fontSize: 22
     }
 };

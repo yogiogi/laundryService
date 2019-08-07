@@ -9,12 +9,14 @@ import {
   Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { List, Checkbox } from 'react-native-paper';
 
 import ExpandableItemComponent from './ExpandableItemComponent'
 import { CONTENT } from '../Data';
 import styles from './Additem.style';
 
-export default class Additem extends Component {
+export default class Additem extends React.Component {
+
   constructor(props) {
     super(props);
     if (Platform.OS === 'android') {
@@ -25,7 +27,35 @@ export default class Additem extends Component {
       totalquantity: 0,
       totalprice: 0,
       username: null,
+      showBar: false,
     };
+  }
+
+  _renderBar() {
+    if (this.state.totalquantity > 0) {
+      return (
+        <View style={styles.row}>
+          <View style={styles.boxPrice}>
+            <Text style={styles.textTitle}>
+              Total Price
+            </Text>
+            <Text style={styles.textPrice}>
+              Rp {this.state.totalprice}
+            </Text>
+          </View>
+          <View style={styles.boxReview}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewOrder')}>
+              <Text style={{
+                color: 'white',
+                paddingLeft: 10
+              }}> Proceed to Pay >> </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return null;
+    }
   }
 
   componentDidMount() {
@@ -81,18 +111,7 @@ export default class Additem extends Component {
             ))}
           </ScrollView>
         </View>
-        <View style={styles.row}>
-          <View style={styles.boxPrice}>
-            <Text style={styles.textPrice}>
-              Rp {this.state.totalprice}
-            </Text>
-          </View>
-          <View style={styles.boxReview}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewOrder')}>
-              <Text style={{ color: 'white', marginTop: 10 }}> Proceed to Pay  </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        {this._renderBar()}
       </View>
     );
   }

@@ -107,6 +107,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -146,15 +147,40 @@ android {
             }
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "$rootDir/../node_modules/react-native/android" }
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+        maven {
+            url "https://maven.google.com" 
+        }
+    }
 }
 
 dependencies {
+    implementation project(':react-native-google-signin')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    compile project(':react-native-maps')
+    compile project(':react-native-google-places')
+    compile project(':react-native-geocoder')
+    implementation project(':react-native-paypal')
 }
 
 // Run this once to be able to run the application with BUCK

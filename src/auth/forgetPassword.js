@@ -21,14 +21,14 @@ export default class forgetPassword extends Component {
                 <TextInput
                     placeholder='Email'
                     underlineColorAndroid='white'
-                    placeholderTextColor='white'
+                    placeholderTextColor='#82D4E3'
                     keyboardType='email-address'
                     style={styles.inputField}
                     onChangeText={(email) => this.setState({ email })}
                     value={this.state.email}
                 />
                 <TouchableOpacity onPress={() => this._forget()}>
-                    <Text style={{ color: 'white', marginTop: 10 }}>Reset Password</Text>
+                    <Text style={{ color: 'white', marginTop: 10, textAlign: 'right' }}>Reset Password</Text>
                 </TouchableOpacity>
             </View>
         )
